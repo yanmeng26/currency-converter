@@ -1,0 +1,42 @@
+.form-group {
+    margin-bottom: 20px;
+}
+.form-group input,
+.form-group select {
+    padding: 3px 5px;
+    min-width: 250px;
+}
+.form-group label {
+    margin-right: 5px;
+}
+.form-group .small-input {
+    min-width: 60px;
+    width: 60px;
+}
+.form-group>div {
+    display: inline-block;
+}
+
+
+.required {
+    color: red;
+  }
+@media (max-width: 767px) {
+    .form-group input,
+    .form-group select {
+        padding-top: 5px;
+        width: 100%;
+        min-width: none;
+    }
+    .anchors a {
+        font-size: 14px;
+    }
+}
+@media (max-width: 360px) {
+    .anchors {
+        display: block;
+    }
+    .anchors a {
+        border-right:none;
+    }
+}

@@ -1,38 +1,104 @@
-.App {
-  text-align: center;
+body {
+  font-family: lato, sans-serif;
+  font-size: 16px;
+  margin-top: 60px;
+  margin-left:60px;
+  min-width: 320px;
+}
+body * {
+  box-sizing: border-box;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+form {
+  margin-bottom: 40px; 
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+h1 {
+  margin-bottom: 40px;
+}
+
+.no-style {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  -o-appearance: none;
+  appearance: none;
+  background-color: unset;
+  border: 0;
+  cursor: pointer;
+  padding: 0;
+  font-family: inherit;
+  font-size: inherit;
+}
+.inline {
+  display: inline!important;
+  margin-right: 5px
+}
+.left {
+    text-align: left;
+}
+.no-padding {
+  padding:0;
+}
+
+
+.off-screen {
+  height: 1px;
+  width: 1px;
+  position: absolute;
+  overflow: hidden;
+  top: -10px;
+}
+
+
+.button-primary,
+.button-primary:link,
+.button-primary:active,
+.button-primary:visited,
+.button-primary:hover {
+  background-color: #007bff;
+  color: #fff;
+  border-radius: 2px;
+}
+.desktop-only {
+  display: initial;
+}
+.mobile-only {
+  display: none;
+}
+.main-content {
+  padding-top: 80px;
+}
+.flex-list-dt {
+  margin: 20px 0 10px 0;
+}
+@media (max-width: 1140px) {
+  .main-content {
+    padding: 60px 20px 20px 20px;
+  }
+}
+@media (min-width: 768px) {
+  .flex-list-dt {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .flex-list-dt .coach-item {
+    width: 225px;
+  }
+}
+@media (max-width: 767px) {
+  .desktop-only {
+    display: none;
+  }
+  .mobile-only {
+    display: initial;
+  }
+  .main-content {
+    padding: 90px 20px 20px 20px;
+  }
+  .container {
+    padding: 100px 20px 60px 20px;
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
