@@ -38,7 +38,7 @@ class Converter extends Component {
              .map(k => encodeURIComponent(k) + '=' + encodeURIComponent(params[k]))
              .join('&');
 
-     let url = `http://localhost:8080/api/convert?`+ query;
+     let url = `ec2-18-220-29-129.us-east-2.compute.amazonaws.com:8080/api/convert?`+ query;
 
      if (props.base_currency != "" && props.base_amount != "" && props.target_currency!="") {
       e.preventDefault();
