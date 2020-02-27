@@ -36,9 +36,9 @@ class Converter extends Component {
              .map(k => encodeURIComponent(k) + '=' + encodeURIComponent(params[k]))
              .join('&');
 
-     let url = `http://18.220.29.129:8080//api/convert?`+ query;
+     let url = `http://18.220.29.129:8080/api/convert?`+ query;
 
-     if (props.base_currency != "" && props.base_amount !== "" && props.target_currency!=="") {
+     if (props.base_currency !== "" && props.base_amount !== "" && props.target_currency!=="") {
       e.preventDefault();
     
      fetch(url)
