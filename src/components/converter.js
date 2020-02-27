@@ -27,7 +27,7 @@ class Converter extends Component {
 
 
   submitHandler = e => {
-    console.log("lalala")
+    console.log("submit")
     const props = this.state
     let params = {
       "base_currency": props.base_currency,
@@ -38,7 +38,7 @@ class Converter extends Component {
              .map(k => encodeURIComponent(k) + '=' + encodeURIComponent(params[k]))
              .join('&');
 
-     let url = `ec2-18-220-29-129.us-east-2.compute.amazonaws.com:8080/api/convert?`+ query;
+     let url = `https://ec2-18-220-29-129.us-east-2.compute.amazonaws.com:8080/api/convert?`+ query;
 
      if (props.base_currency != "" && props.base_amount != "" && props.target_currency!="") {
       e.preventDefault();
