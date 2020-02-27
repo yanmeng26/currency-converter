@@ -1,7 +1,9 @@
+// this file is for currency converter front side 
+//author: Meng Yan
+//date:02/27/2020
+
 import React, { Component } from "react";
-
 import "../css/converter.css";
-
 
 class Converter extends Component {
   constructor() {
@@ -12,19 +14,15 @@ class Converter extends Component {
       base_amount: "",
       target_currency: "",
       target_amount:""
-
        
     };
   }
 
-
   changeHandler = e => this.setState({ [e.target.name]: e.target.value });
-
 
   resetHandler = e =>{
     window.location.reload();
   }
-
 
   submitHandler = e => {
     console.log("submit")
@@ -38,9 +36,9 @@ class Converter extends Component {
              .map(k => encodeURIComponent(k) + '=' + encodeURIComponent(params[k]))
              .join('&');
 
-     let url = `https://ec2-18-220-29-129.us-east-2.compute.amazonaws.com:8080/api/convert?`+ query;
+     let url = `/api/convert?`+ query;
 
-     if (props.base_currency != "" && props.base_amount != "" && props.target_currency!="") {
+     if (props.base_currency != "" && props.base_amount !== "" && props.target_currency!=="") {
       e.preventDefault();
     
      fetch(url)
@@ -56,17 +54,13 @@ class Converter extends Component {
   };  
 
   render() {
-    
     return (
       <div>
-        
         <div className="container">
-          
           <h1> Currency Conversion</h1>
           <div className="form-group result">
                     <label htmlFor="amount">Target Amount: <label >{this.state.target_amount} </label> </label>
-                    
-                </div>
+          </div>
             <form>
                 <div className="form-group">
                     <label htmlFor="currency">From: <span className="required">*</span></label>
@@ -148,14 +142,11 @@ class Converter extends Component {
                     <option value="ZAR">ZAR</option>
                     </select>
                 </div>
-                
                 <div className="form-group">
                   <button onClick={(e) => this.submitHandler(e)} className="no-style button button-primary" type="submit">Calculate </button>
                   <button  onClick={(e) => this.resetHandler(e)} className="no-style button button-primary reset" type="submit">Reset </button>
                 </div>
-            </form>
-
-            
+            </form>  
         </div>
       </div>
     );

@@ -7,15 +7,9 @@ var bodyParser = require("body-parser");
 const app = express();
 var https = require('https');
 const cors = require('cors')
-
 app.use(cors())
-
-
 var infoMap = {};
-
-
 var parseString = require('xml2js').parseString;
-
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
@@ -46,36 +40,30 @@ function xmlToJson(url, callback) {
     });
   }
 
-
-
-
 /* save xml currency name and rate into infoMap object, get rates from infoMap based on base & target currency. 
   do calculation based use callback to pass final result
 */
   function calculate(base_amount,base_currency,target_currency, callback)
   {
 
-      xmlToJson(url, function(err, data) {
+      xmlToJson(url, function(err, xmlData) {
         if (err) {
 
           return console.err(err);
         }
 
-        //console.log(JSON.stringify(data, null, 2));
+        //console.log(JSON.stringify(xmlData, null, 2));
 
-        let arr = data["gesmes:Envelope"]["Cube"][0]["Cube"][0]["Cube"];
+        let arrayofCurrencyObject = xmlData["gesmes:Envelope"]["Cube"][0]["Cube"][0]["Cube"];
         //console.log('arr ' ,arr);
-        for(let i = 0 ; i < arr.length; i++)
+        for(let i = 0 ; i < arrayofCurrencyObject.length; i++)
         {
-            let obj = arr[i]['$']
-            let currencyName = obj.currency
-            let currencyValue = obj.rate
+            let currencyObj = arrayofCurrencyObject[i]['$']
+            let currencyName = currencyObj.currency
+            let currencyValue = currencyObj.rate
             infoMap[currencyName] = currencyValue;
 
          }
-
-
-
 
         let baseRate  = infoMap[base_currency]
         console.log("baseRate is " + baseRate)
@@ -85,8 +73,6 @@ function xmlToJson(url, callback) {
         callback(result);
       })
   }
-
-
 
 
   // get data from users input, check request , call calculate function and send response to front end 
@@ -104,6 +90,7 @@ function xmlToJson(url, callback) {
     let base_amount = req.query.base_amount;
     let target_currency = req.query.target_currency;
   
+
     // calculate(base_amount,base_currency,target_currency).then((result)=>{console.log(result)});
     calculate(base_amount,base_currency,target_currency, function(result){
       console.log('=======res  ' ,  result);
@@ -114,12 +101,9 @@ function xmlToJson(url, callback) {
   
     })
   
-  
-  
   })
 
 const port = process.env.PORT || 8080;
-
 app.listen(8080, () => {
  console.log('Running on port ' + port);
 });
