@@ -17,6 +17,13 @@
     display: inline-block;
 }
 
+.reset{
+margin-left:20px;
+}
+
+.result{
+    font-weight:bold;
+}
 
 .required {
     color: red;

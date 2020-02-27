@@ -21,42 +21,38 @@ class Converter extends Component {
   changeHandler = e => this.setState({ [e.target.name]: e.target.value });
 
 
-  
+  resetHandler = e =>{
+    window.location.reload();
+  }
 
 
   submitHandler = e => {
+    console.log("lalala")
     const props = this.state
-    if (props.base_currency != "" && props.base_amount != "" && props.target_currency!="") {
+    let params = {
+      "base_currency": props.base_currency,
+      "base_amount":props.base_amount,
+      "target_currency":props.target_currency
+    };
+    let query = Object.keys(params)
+             .map(k => encodeURIComponent(k) + '=' + encodeURIComponent(params[k]))
+             .join('&');
+
+     let url = `http://localhost:8080/api/convert?`+ query;
+
+     if (props.base_currency != "" && props.base_amount != "" && props.target_currency!="") {
       e.preventDefault();
-      fetch("/endpoints/convert", {
-        method: "post",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(props)
-      })
-      .then(function(response) {
-        if (!response.ok) {
-            throw Error(response.statusText);
-        }
-        return response.json();
-      })
-      .then(function(response) {
-          if (response.errno) {
-            console.log(response);
-            alert("There was an error. Please try again in a moment.");
-          }
-          else {
-            this.setState({target_amount:response.target_amount});
-           
-          }
-      })
-      .catch(function(error) {
-          console.log(error);
-          alert("There was an error. Please try again in a moment.");
-      });
-    }
+    
+     fetch(url)
+     .then(data => data.json())
+     .then((response) => {
+       //console.log('request succeeded with JSON response', response)
+       let result = response.target_amount.toFixed(2);
+       this.setState({target_amount:result});
+     }).catch(function (error) {
+       console.log('request failed', error)
+     });
+     }
   };  
 
   render() {
@@ -65,12 +61,17 @@ class Converter extends Component {
       <div>
         
         <div className="container">
+          
           <h1> Currency Conversion</h1>
+          <div className="form-group result">
+                    <label htmlFor="amount">Target Amount: <label >{this.state.target_amount} </label> </label>
+                    
+                </div>
             <form>
                 <div className="form-group">
                     <label htmlFor="currency">From: <span className="required">*</span></label>
                     <select onChange={ this.changeHandler} name = "base_currency"value={this.state.base_currency} required>
-                   
+                    <option value="">Please Select</option>
                     <option value="USD" >USD</option>
                     <option value="JPY">JPY</option>
                     <option value="BGN">BGN</option>
@@ -112,6 +113,7 @@ class Converter extends Component {
                 <div className="form-group">
                     <label htmlFor="currency">To: <span className="required">*</span></label>
                     <select onChange={this.changeHandler} name="target_currency" value={this.state.target_currency} required>
+                    <option value="">Please Select</option>
                     <option value="USD">USD</option>
                     <option value="JPY">JPY</option>
                     <option value="BGN">BGN</option>
@@ -149,13 +151,11 @@ class Converter extends Component {
                 
                 <div className="form-group">
                   <button onClick={(e) => this.submitHandler(e)} className="no-style button button-primary" type="submit">Calculate </button>
+                  <button  onClick={(e) => this.resetHandler(e)} className="no-style button button-primary reset" type="submit">Reset </button>
                 </div>
             </form>
 
-            <div className="form-group">
-                    <label htmlFor="amount">Target Amount: </label>
-                    <p>{this.state.target_amount} </p>
-                </div>
+            
         </div>
       </div>
     );
