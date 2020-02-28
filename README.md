@@ -9,19 +9,25 @@ You will need the following things properly installed on your computer.
 `Git`
 `Node.js(with NPM)`
 
+## Installation
+`git clone https://github.com/yanmeng26/currency-converter.git` 
+ `cd currency-converter`
+ `npm install`
+
+
 ## Node/React Versions
  `node v8.12.0` 
  `npm v6.4.1`
  NOTE: npm does not support some versions of Node.js
 
 
-## To View Locally
+## To Run Locally
 
-`npm install` -- to install dependencies
+`npm install` 
 
-`node server.js`  -- to start server 
+`node server.js`  
 
-`npm start` --- to start react
+`npm start` 
 
 The app will now be available on localhost:3000.
 
