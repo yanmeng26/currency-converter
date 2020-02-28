@@ -31,7 +31,7 @@ NOTE: If you get an "Cannot find module". Make sure this package is installed." 
 
 In the project directory, you can run:
 
-### `./start.sh`
+### `./build.sh`
 
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
