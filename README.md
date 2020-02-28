@@ -17,11 +17,11 @@ You will need the following things properly installed on your computer.
 
 ## To View Locally
 
-`npm install`
+`npm install` -- to install dependencies
 
-`node server.js`
+`node server.js`  -- to start server 
 
-`npm start`
+`npm start` --- to start react
 
 The app will now be available on localhost:3000.
 
