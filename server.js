@@ -66,13 +66,50 @@ function xmlToJson(url, callback) {
          }
 
         let baseRate  = infoMap[base_currency]
-        console.log("baseRate is " + baseRate)
+        //console.log("baseRate is " + baseRate)
         let targetRate = infoMap[target_currency]
-        console.log('targetRate ' ,  targetRate)
+        //console.log('targetRate ' ,  targetRate)
         let result = base_amount * targetRate/baseRate
         callback(result);
       })
   }
+
+
+  //get currency list from xml file dynamically 
+  function getLatestCurrencyList(callback){
+    xmlToJson(url, function(err, xmlData) {
+      if (err) {
+
+        return console.err(err);
+      }
+
+     let keys = []
+
+      let arr = xmlData["gesmes:Envelope"]["Cube"][0]["Cube"][0]["Cube"];
+      //console.log('arr ' ,arr);
+      for(let i = 0 ; i < arr.length; i++)
+      {
+        let obj = arr[i]['$']
+        let currencyName = obj.currency
+        keys.push(currencyName)
+      }
+      console.log('--------keys ',keys)
+      callback(keys);
+    })
+  }
+
+
+  // get  currecny information and sent to drop list in front-end
+  app.get("/api/currencyKeys",(req,res)=>{
+    getLatestCurrencyList(function(result){
+
+      res.status(200);
+      res.json(result);
+      res.end();
+    })
+
+  })
+
 
 
   // get data from users input, check request , call calculate function and send response to front end 
@@ -83,6 +120,10 @@ function xmlToJson(url, callback) {
     if(req.query.base_amount== null ||req.query.base_currency==null || req.query.target_currency==null)
     {
       console.log("req miss some query")
+      res.status(400);
+      res.json({status: 400, message:"req miss some query" });
+      res.end()
+
     }
     console.log('----------req ',req.query)
   
