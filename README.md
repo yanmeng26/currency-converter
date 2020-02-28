@@ -2,7 +2,7 @@
 This project supports currency conversion between any two currencies in the [XML source]( https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml).
 The frontend was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 The backend used [Node.js](https://github.com/nodejs)
-You can access the client side by [http://18.220.29.129:3000/] (http://18.220.29.129:3000/)
+You can access the client side by [this link] (http://18.220.29.129:3000/)
 
 ## Prerequisites
 You will need the following things properly installed on your computer.
