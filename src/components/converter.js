@@ -50,7 +50,7 @@ class Converter extends Component {
 
      let url = `http://18.220.29.129:8080/api/convert?`+ query;
 
-     if (props.base_currency !== "" && props.base_amount >= 0 && props.target_currency!=="") {
+     if (props.base_currency !== "" && props.base_amount >= 0 && props.base_amount<=999999999999&& props.target_currency!=="") {
       e.preventDefault();
     
      fetch(url)
@@ -66,7 +66,11 @@ class Converter extends Component {
      else if(props.base_amount<0)
      {
        alert("Amount should not be negative")
-       this.setState({base_amount: ""});
+       
+     }
+     else if(props.base_amount>999999999999)
+     {
+      alert("Amount should not less than 999999999999")
      }
   };  
 
