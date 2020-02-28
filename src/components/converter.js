@@ -31,12 +31,15 @@ class Converter extends Component {
     });
   }
 
+  //any input change handler
   changeHandler = e => this.setState({ [e.target.name]: e.target.value });
 
+  // reset button handler
   resetHandler = e =>{
     window.location.reload();
   }
 
+  //submit button handler  send user input info to api
   submitHandler = e => {
     console.log("submit")
     const props = this.state
@@ -80,14 +83,13 @@ class Converter extends Component {
   render() {
     return (
       <div>
-        
+  
         <div className="container">
           
           <h1> Currency Conversion</h1>
           <div className="form-group result">
-                    <label htmlFor="amount">Target Amount: <label >{this.state.target_amount} </label> </label>
-                    
-                </div>
+                    <label htmlFor="amount">Target Amount: <label >{this.state.target_amount} </label> </label>         
+          </div>
             <form>
                 <div className="form-group">
                     <label htmlFor="currency">From: <span className="required">*</span></label>
