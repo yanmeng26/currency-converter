@@ -20,7 +20,7 @@ class Converter extends Component {
   }
 
   componentDidMount() {
-    fetch("http://localhost:8080/api/currencyKeys")
+    fetch("http://18.220.29.129:8080/api/currencyKeys")
       .then(data => data.json())
       .then(response => {
           this.setState({currencyList: response})
