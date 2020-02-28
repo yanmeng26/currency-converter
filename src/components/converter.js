@@ -67,17 +67,13 @@ class Converter extends Component {
      else if(props.base_amount<0)
      {
        alert("Amount should not be negative")
-       this.setState({base_currency: props.base_currency,
-       base_amount:"",
-       target_currency:props.target_currency})
+      
        
      }
      else if(props.base_amount>999999999999)
      {
        alert("Amount should be less than 999999999999")
-       this.setState({base_currency: props.base_currency,
-        base_amount:"",
-        target_currency:props.target_currency})
+      
      }
   };  
 
